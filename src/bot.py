@@ -26,7 +26,7 @@ async def on_message(message):
             await message.reply('You need patience, I might take some time to hunt down users...\nAlso consider donating, who knows I might speed up!!')
             users = message.content.strip().split()[1:]
             for user in users:
-                await message.reply('Searching for {}'.format(user))
+                await message.reply('Searching for {}...'.format(user))
                 run(['python', 'sherlock.py', user])
                 await message.reply("Generated .txt file of TARGET {}:".format(user), file=discord.File('{}.txt'.format(user)))
                 os.remove('{}.txt'.format(user))
@@ -43,12 +43,13 @@ async def on_message(message):
     elif message.content.startswith('$dm'):
         print("REQUEST:", message.content,'> requested by {}'.format(message.author.name))
         if len(message.content.strip().split()) >= 2:
-            await message.reply('Keep an eye on your DMs')
-            await message.author.send('You need patience, I might take some time to hunt down users...\nAlso consider donating, who knows I might speed up!!')
             users = message.content.strip().split()[1:]
+            await message.reply('Keep an eye on your DMs')
+            await message.delete()
+            await message.author.send('You need patience, I might take some time to hunt down users...\nAlso consider donating, who knows I might speed up!!')
             await message.author.send("YOUR REQUEST :> {}".format(message.content))
             for user in users:
-                await message.author.send('Searching for {}'.format(user))
+                await message.author.send('Searching for {}...'.format(user))
                 run(['python', 'sherlock.py', user])
                 await message.author.send("Generated .txt file of TARGET {}:".format(user), file=discord.File('{}.txt'.format(user)))
                 os.remove('{}.txt'.format(user))
