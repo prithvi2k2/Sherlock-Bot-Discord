@@ -8,12 +8,12 @@ from threading import Thread
 app = Flask('')
 
 @app.route('/')
-def home():
+def main():
     return "I don't know how you landed here, Donations are massively appreciated.\nDonations do speed me up!!"
 
 def run():
   app.run(host='0.0.0.0',port=8080)
 
 def dont_die():
-    t = Thread(target=run)
-    t.start()
+    server = Thread(target=run)
+    server.start()
