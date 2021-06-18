@@ -28,7 +28,7 @@ async def on_message(message):
             users = message.content.strip().split()[1:]
             for user in users:
                 await message.reply('Searching for {}...'.format(user))
-                run(['python', 'sherlock.py', user])
+                run(['python', 'src/sherlock.py', user])
                 await message.reply("Generated .txt file of TARGET {}:".format(user), file=discord.File('{}.txt'.format(user)))
                 os.remove('{}.txt'.format(user))
                 # Live printing to discord will be figured out later due to 4k chaar limit per msg of discord 
@@ -51,7 +51,7 @@ async def on_message(message):
             await message.author.send("YOUR REQUEST :> {}".format(message.content))
             for user in users:
                 await message.author.send('Searching for {}...'.format(user))
-                run(['python', 'sherlock.py', user])
+                run(['python', 'src/sherlock.py', user])
                 await message.author.send("Generated .txt file of TARGET {}:".format(user), file=discord.File('{}.txt'.format(user)))
                 os.remove('{}.txt'.format(user))
                 # Live printing to discord will be figured out later due to 4k chaar limit per msg of discord 
