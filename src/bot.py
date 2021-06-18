@@ -1,6 +1,7 @@
 import discord
 from subprocess import run
 import os
+from dont_die import dont_die
 from dotenv import load_dotenv
 load_dotenv('.env')
 
@@ -63,5 +64,5 @@ async def on_message(message):
         else:
             await message.reply('Check usage guide...')
 
-
+dont_die()      #Efforts to keep bot alive 24/7
 client.run(os.getenv('TOKEN'))
