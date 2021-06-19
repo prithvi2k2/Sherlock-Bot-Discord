@@ -1752,8 +1752,7 @@
     "username_unclaimed": "noonewouldeverusethis7"
   },
   "YouTube": {
-    "errorMsg": "Not Found",
-    "errorType": "message",
+    "errorType": "status_code",
     "url": "https://www.youtube.com/{}",
     "urlMain": "https://www.youtube.com/",
     "username_claimed": "blue",
