@@ -1034,20 +1034,6 @@
     "username_claimed": "red",
     "username_unclaimed": "noonewouldeverusethis7"
   },
-  "Oracle Community": {
-    "errorType": "status_code",
-    "url": "https://community.oracle.com/people/{}",
-    "urlMain": "https://community.oracle.com",
-    "username_claimed": "dev",
-    "username_unclaimed": "noonewouldeverusethis7"
-  },
-  "Otzovik": {
-    "errorType": "status_code",
-    "url": "https://otzovik.com/profile/{}",
-    "urlMain": "https://otzovik.com/",
-    "username_claimed": "blue",
-    "username_unclaimed": "noonewouldeverusethis7"
-  },
   "OurDJTalk": {
     "errorMsg": "The specified member cannot be found",
     "errorType": "message",
@@ -1952,14 +1938,6 @@
     "url": "https://www.hunting.ru/forum/members/?username={}",
     "urlMain": "https://www.hunting.ru/forum/",
     "username_claimed": "red",
-    "username_unclaimed": "noonewouldeverusethis7"
-  },
-  "iMGSRC.RU": {
-    "errorType": "response_url",
-    "errorUrl": "https://imgsrc.ru/",
-    "url": "https://imgsrc.ru/main/user.php?user={}",
-    "urlMain": "https://imgsrc.ru/",
-    "username_claimed": "blue",
     "username_unclaimed": "noonewouldeverusethis7"
   },
   "igromania": {

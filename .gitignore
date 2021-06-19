@@ -1,5 +1,5 @@
 /venv
 *.env
-start.ps1
+*.ps1
 src/*.txt
 src/__pycache__
