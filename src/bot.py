@@ -4,7 +4,7 @@ import os
 from dont_die import dont_die
 from dotenv import load_dotenv
 load_dotenv('.env')
-
+from time import time
 
 client = discord.Client()
 
@@ -22,45 +22,38 @@ async def on_message(message):
 
     #PUBLIC SEARCH
     if message.content.startswith('$search'):
-        print("REQUEST:", message.content,'> requested by {}'.format(message.author.name))
+        print(f'REQUEST: {message.content} > by {message.author.name}')
         if len(message.content.strip().split()) >= 2:
+            ETA=time()   #Calculate total time and print to console on completion
             await message.reply('You need patience, I might take some time to hunt down users...\nAlso consider donating, who knows I might speed up!!')
             users = message.content.strip().split()[1:]
             for user in users:
-                await message.reply('Searching for {}...'.format(user))
+                await message.reply(f'Searching for {user}...')
+                timer=time()    
                 run(['python', 'src/sherlock.py', user])
-                await message.reply("Generated .txt file of TARGET {}:".format(user), file=discord.File('{}.txt'.format(user)))
+                timer=round(time()-timer,2)     #Total time taken per userLookUp
+                await message.reply(f'Generated .txt file of TARGET {user} in {timer}s', file=discord.File(f'{user}.txt'))
                 os.remove('{}.txt'.format(user))
-                # Live printing to discord will be figured out later due to 4k chaar limit per msg of discord 
-                # with open('{}.txt'.format(user),'r') as f:
-                #     data=f.read()
-                #     await message.channel.send(data)
-                #     os.remove(f)
             await message.reply('Successfully processed your request!')
-            print(users, ' <-- Successful PUBLIC SEARCH!! requested by {}'.format(message.author.name))
+            print(f'{users} <-- Successful SEARCH!! for {message.author.name} in {round(time()-ETA,2)}s')
         else:
             await message.reply('Check usage guide...')
-        #PRIVATE SEARCH
-    elif message.content.startswith('$dm'):
-        print("REQUEST:", message.content,'> requested by {}'.format(message.author.name))
+    #QUICK SEARCH TIMEOUT 1 second
+    elif message.content.startswith('$quik'):
+        print("REQUEST:", message.content,f'> requested by {message.author.name}')
         if len(message.content.strip().split()) >= 2:
+            ETA=time()
+            await message.reply('Consuming adrenaline, FLASH!!!\ngotta ditch slow sites, might not be accurate!!')
             users = message.content.strip().split()[1:]
-            await message.reply('Keep an eye on your DMs')
-            await message.delete()
-            await message.author.send('You need patience, I might take some time to hunt down users...\nAlso consider donating, who knows I might speed up!!')
-            await message.author.send("YOUR REQUEST :> {}".format(message.content))
             for user in users:
-                await message.author.send('Searching for {}...'.format(user))
-                run(['python', 'src/sherlock.py', user])
-                await message.author.send("Generated .txt file of TARGET {}:".format(user), file=discord.File('{}.txt'.format(user)))
-                os.remove('{}.txt'.format(user))
-                # Live printing to discord will be figured out later due to 4k chaar limit per msg of discord 
-                # with open('{}.txt'.format(user),'r') as f:
-                #     data=f.read()
-                #     await message.channel.send(data)
-                #     os.remove(f)
-            await message.author.send('Successfully processed your request!')
-            print(users, ' <-- Successful SEARCH!! requested by {}'.format(message.author.name))
+                await message.reply(f'Searching for {user}...')
+                timer=time()
+                run(['python', 'src/sherlock.py', '--timeout', '1', user])
+                timer=round(time()-timer,2)
+                await message.reply(f'Generated .txt file of TARGET {user} in {timer}s', file=discord.File(f'{user}.txt'))
+                os.remove(f'{user}.txt')
+            await message.reply('Successfully processed your request!')
+            print(f'{users} <-- Successful QUICK SEARCH!! for {message.author.name} in {round(time()-ETA,2)}s')
         else:
             await message.reply('Check usage guide...')
 
